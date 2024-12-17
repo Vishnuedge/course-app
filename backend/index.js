@@ -3,10 +3,12 @@ require('dotenv').config();
 const { dbConnect } = require("./db/db");
 const adminRouter = require("./routes/admin");
 const userRouter = require("./routes/user");
+const authRouter = require("./routes/auth");
 
 const app = express();
 
 app.use(express.json());
+app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
 app.use("/user", userRouter);
 

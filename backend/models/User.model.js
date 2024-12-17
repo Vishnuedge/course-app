@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+const { boolean } = require("zod");
 
 const userSchema = new mongoose.Schema({
-    email : String,
     password : String,
     userName : String,
+    isAdmin : Boolean,
     purchasedCourse : [{
         type : mongoose.Schema.Types.ObjectId,
         ref : "Course"
