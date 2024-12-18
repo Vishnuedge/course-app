@@ -4,13 +4,14 @@ const { dbConnect } = require("./db/db");
 const adminRouter = require("./routes/admin");
 const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
+const {authMiddleware} = require("./middleware/auth")
 
 const app = express();
 
 app.use(express.json());
 app.use("/auth", authRouter);
-app.use("/admin", adminRouter);
-app.use("/user", userRouter);
+app.use("/admin", authMiddleware, adminRouter);
+app.use("/user",authMiddleware, userRouter);
 
 const PORT = process.env.PORT || 8001
 

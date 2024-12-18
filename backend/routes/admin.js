@@ -3,6 +3,7 @@ const User = require("../models/User.model");
 const { hashPassword } = require("../utlis");
 const Course = require("../models/Course.model");
 const { adminMiddleware } = require("../middleware/user");
+const { authMiddleware } = require("../middleware/auth");
 const router = Router();
 
 router.post("/signup", (req, res) => {
@@ -23,7 +24,7 @@ router.post("/signup", (req, res) => {
     return res.status(400).send("User not created");
 })
 
-router.post("/addCourse", adminMiddleware, (req, res) => {
+router.post("/addCourse", authMiddleware, (req, res) => {
     const {courseTitle="", courseDescription="", coursePrice = 0, courseBanner } = req.body; 
     const course =  new Course({
         title : courseTitle,
